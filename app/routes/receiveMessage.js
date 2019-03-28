@@ -18,12 +18,7 @@ module.exports = function(app){
     console.log(`command: ${botCommands}`);
 
     // forbbiden
-    forbbidens = [
-                    'bash',
-                    'ls',
-                    'echo',
-                    'cat'
-                ];
+    forbbidens = [ 'bash', 'ls', 'echo', 'cat' ];
 
     //check list to return
     forbbidens.forEach(function(forbbiden){
