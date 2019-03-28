@@ -14,15 +14,15 @@ module.exports = function(app){
     console.log("")
     
     // checking character received
-    var botCommands = message.text.split(" ");
-    console.log(`command: ${botCommands}`);
+    var commands = message.text.split(" ");
+    console.log(`command: ${commands}`);
 
     // forbbiden
     forbbidens = [ 'bash', 'ls', 'echo', 'cat' ];
 
     //check list to return
     forbbidens.forEach(function(forbbiden){
-      if(botCommands[0].includes(forbbiden)){
+      if(commands[0].includes(forbbiden)){
         console.log('forbbiden')
         message.text = 'forbbiden'
       }
@@ -38,7 +38,6 @@ module.exports = function(app){
         }
       )
       .then(response => {
-        console.log('')
         console.log(`return: ${message.text}`)
         console.log('Message posted on telegram chat')
         console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
