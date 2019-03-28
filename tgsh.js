@@ -4,8 +4,6 @@ const bodyParser = require('body-parser')
 const axios = require('axios')
 const shell = require('shelljs')
 const fs = require('fs');
-//const db = fs.readFileSync('db');
-//const data = JSON.parse(db);
 
 app.use(bodyParser.json())
 app.use(
