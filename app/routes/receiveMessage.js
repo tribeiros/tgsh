@@ -18,13 +18,16 @@ module.exports = function(app){
     console.log(`command: ${commands}`);
 
     // forbbiden
-    forbbidens = [ 'bash', 'ls', 'echo', 'cat' ];
+    permitteds = [ 'bash', 'ls', 'echo', 'cat' ];
 
     //check list to return
-    forbbidens.forEach(function(forbbiden){
-      if(commands[0].includes(forbbiden)){
-        console.log('forbbiden')
-        message.text = 'forbbiden'
+    permitteds.forEach(function(permitted){
+      if(commands.includes(permitted)){
+        console.log(permitted)
+        message.text = permitted
+      } else {
+        console.log('forbidden')
+        message.text = 'forbidden'
       }
     })
 
