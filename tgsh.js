@@ -21,12 +21,6 @@ app.post('/msg', function(req, res) {
   const apiTelegram = 'https://api.telegram.org'
   const botTelegram = '643418145:AAEp5uWzantnnqaudhSmitkLCq9q1J6F42Y' //newversiontgshbot 
   var { message } = req.body
-  
-
-  // callback to save on database
-  function finished(err){
-    console.log('all set on db.');
-  }
 
   // logging
   console.log("")
@@ -35,9 +29,24 @@ app.post('/msg', function(req, res) {
   console.log("")
   
   // checking character received
-  message.text = message.text.replace(/\//, "")
   var botCommands = message.text.split(" ");
-  console.log(`command: ${botCommands}`)
+  console.log(`command: ${botCommands}`);
+
+  // forbbiden
+  forbbidens = [
+                  'bash',
+                  'ls',
+                  'echo',
+                  'cat'
+              ];
+
+  //check list to return
+  forbbidens.forEach(function(forbbiden){
+    if(botCommands[0].includes(forbbiden)){
+      console.log('forbbiden')
+      message.text = 'forbbiden'
+    }
+  })
 
   // posting on telegram chat
   axios
@@ -50,6 +59,7 @@ app.post('/msg', function(req, res) {
     )
     .then(response => {
       console.log('')
+      console.log(`return: ${message.text}`)
       console.log('Message posted on telegram chat')
       console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
       res.end('ok')
