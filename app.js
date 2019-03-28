@@ -2,8 +2,6 @@
 // dependencies
 const app = require('./config/express')();
 const receiveMessage = require('./app/routes/receiveMessage')(app);
-const shell = require('shelljs')
-const fs = require('fs');
 
 // api server
 app.listen(3000, function() {
