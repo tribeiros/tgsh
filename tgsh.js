@@ -1,3 +1,5 @@
+// tgsh script
+// dependencies
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
@@ -5,6 +7,7 @@ const axios = require('axios')
 const shell = require('shelljs')
 const fs = require('fs');
 
+// parsing json 
 app.use(bodyParser.json())
 app.use(
   bodyParser.urlencoded({
@@ -12,36 +15,31 @@ app.use(
   })
 )
 
+// receive message from telegam bot
 app.post('/msg', function(req, res) {
   const now = new Date();
   const apiTelegram = 'https://api.telegram.org'
   const botTelegram = '643418145:AAEp5uWzantnnqaudhSmitkLCq9q1J6F42Y' //newversiontgshbot 
   var { message } = req.body
   
-  try {
-  fs.writeFile('log', `User: ${message.from.username} , ${message.from.first_name} ${message.from.last_name} | ID: ${message.from.id}\n${now}\ncommand: ${message.text}`, { flag: 'a+' }, (err) => {})
-  //file written successfully
-} catch (err) {
-  console.error(err)
-}
-  
+
+  // callback to save on database
   function finished(err){
     console.log('all set on db.');
   }
-                
-  if (message.text === undefined || message.text === "/"){
-    message.text = "undefined"
-  }
+
+  // logging
   console.log("")
   console.log(`User: ${message.from.username} , ${message.from.first_name} ${message.from.last_name} | ID: ${message.from.id}`)
   console.log(`Date: ${now}`)
   console.log("")
   
+  // checking character received
   message.text = message.text.replace(/\//, "")
   var botCommands = message.text.split(" ");
   console.log(`command: ${botCommands}`)
-  
 
+  // posting on telegram chat
   axios
     .post(
       `${apiTelegram}/bot${botTelegram}/sendMessage`,
